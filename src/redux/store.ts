@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 import authReducer from "./services/authSlice";
 import basketReducer from "./services/basketSlice";
+import packageReducer from "./services/packagesSlice";
 
 import { loginApi } from "./services/authSlice";
 import { packageApi } from "./services/packagesSlice";
@@ -12,6 +13,7 @@ export const store = configureStore({
   reducer: {
     authReducer,
     basketReducer,
+    packageReducer,
     [loginApi.reducerPath]: loginApi.reducer,
     [packageApi.reducerPath]: packageApi.reducer,
     [patmentApi.reducerPath]: patmentApi.reducer,

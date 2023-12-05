@@ -8,7 +8,7 @@ const MyBasket = ({
 }: {
   basketList: any;
   onClick: any;
-  isLoadingButton:boolean
+  isLoadingButton?:boolean
 }) => {
   return (
     <div>

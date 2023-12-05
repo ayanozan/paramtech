@@ -1,12 +1,12 @@
 "use client";
-import { Col, Divider, Flex, Row } from "antd";
+import { useRouter } from "next/navigation";
+import { Col, Divider, Row } from "antd";
 import PackageCard from "@/components/PackageCard";
 import ShoppingCart from "@/components/ShoppingCart";
 import { useGetPackageQuery } from "@/redux/services/packagesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { handleAddOrRemovePackage } from "@/redux/services/basketSlice";
-import { PackageState } from "@/redux/services/packagesSlice";
-import { useRouter } from "next/navigation";
+import { PackageState, selectForDetail } from "@/redux/services/packagesSlice";
 
 const Packages = () => {
   const router = useRouter();
@@ -17,19 +17,19 @@ const Packages = () => {
   const isSelectedPackage =
     useSelector((state: any) => state.basketReducer.basketList).length > 0;
 
-    const selectedPackageIds =
-    useSelector((state: any) => state.basketReducer.basketListIds)
+  const selectedPackageIds = useSelector(
+    (state: any) => state.basketReducer.basketListIds
+  );
 
-    
   const dispatch = useDispatch();
-
 
   const handleSelect = (item: PackageState) => {
     dispatch(handleAddOrRemovePackage(item));
   };
-  const handleSelectForDetail = (event: any) => (id: string) => {
+  const handleSelectForDetail = (event: any) => (item: any) => {
     event.stopPropagation();
-    router.push(`/packages/${id}`);
+    dispatch(selectForDetail(item));
+    router.push(`/packages/${item._id}`);
   };
   return (
     <div
@@ -50,7 +50,7 @@ const Packages = () => {
               value={item}
               onSelect={() => handleSelect(item)}
               isSelected={selectedPackageIds.includes(item._id)}
-              goToDetail={(event) => handleSelectForDetail(event)(item._id)}
+              goToDetail={(event) => handleSelectForDetail(event)(item)}
               loading={isLoading}
             />
           </Col>

@@ -1,12 +1,18 @@
 import { Typography } from "antd";
-import React, { Children } from "react";
+import React from "react";
 
 interface IContentWrapper {
-  title: string;
+  title: React.ReactNode | string;
   children: React.ReactNode;
+  isPaddingZero?: boolean;
 }
 
-const ContentWrapper = ({ title, children }: IContentWrapper) => {
+const ContentWrapper = ({
+  title,
+  children,
+  isPaddingZero,
+
+}: IContentWrapper) => {
   return (
     <div>
       <Typography.Title level={5}>{title}</Typography.Title>
@@ -14,7 +20,7 @@ const ContentWrapper = ({ title, children }: IContentWrapper) => {
         style={{
           borderRadius: "8px",
           border: "1px solid #E1E1E1",
-          padding: "22px",
+          padding: !isPaddingZero ? "22px" : 0,
         }}
       >
         {children}

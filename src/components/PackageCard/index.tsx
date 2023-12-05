@@ -1,17 +1,8 @@
 "use client";
-
-import React, { HtmlHTMLAttributes } from "react";
+import React from "react";
+import { Button, Card, Flex, Typography, Badge } from "antd";
 import { PackageState } from "@/redux/services/packagesSlice";
 
-import { Button, Card, Flex, Typography, Space, Badge } from "antd";
-
-const cardStyle: React.CSSProperties = {
-  width: 489,
-};
-
-const imgStyle: React.CSSProperties = {
-  width: 192,
-};
 const PackageCard = ({
   value,
   isSelected,
@@ -39,12 +30,11 @@ const PackageCard = ({
       loading={loading}
     >
       <Flex justify="space-between">
-        <img alt="avatar" src={value.imagePath} style={imgStyle} />
+        <img alt="avatar" src={value.imagePath} style={{width: '192px'}} />
         <Flex
           flex={1}
           vertical
           align="flex-start"
-          //   justify="space-between"
           style={{ padding: "22px" }}
         >
           <Flex

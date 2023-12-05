@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { ReduxProvider } from "@/redux/provider";
-import StyledComponentsRegistry from "../utils/AntdRegistry";
-
 import { Inter } from "next/font/google";
+import StyledComponentsRegistry from "../utils/AntdRegistry";
+import HeaderProvider from "@/components/Header";
 
 import "./globals.css";
 import "../styles/antd.css";
 
-import HeaderProvider from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 

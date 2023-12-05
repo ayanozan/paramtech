@@ -1,12 +1,9 @@
 import React from "react";
 import { Row, Col, Form, Input } from "antd";
 
-const CreditCardForm = ({ onSubmit, form }: { onSubmit: any; form: any }) => {
+const CreditCardForm = ({ form }: { form: any }) => {
   const maskCreditCardNumber = (value: any) => {
-    // Sayıları al ve maksimum 16 karaktere sınırla
     const numericValue = value.replace(/\D/g, "").slice(0, 16);
-
-    // 4'ler arasına boşluk ekleyerek maskele
     let maskedValue = "";
     for (let i = 0; i < numericValue.length; i += 4) {
       maskedValue += numericValue.slice(i, i + 4) + " ";
@@ -15,7 +12,7 @@ const CreditCardForm = ({ onSubmit, form }: { onSubmit: any; form: any }) => {
     return maskedValue.trim();
   };
 
-  const validateCreditCardNumber = (rule: any, value: any) => {
+  const validateCreditCardNumber = (value: any) => {
     const numericValue = value.replace(/\D/g, "");
 
     if (numericValue.length !== 16) {
@@ -26,17 +23,14 @@ const CreditCardForm = ({ onSubmit, form }: { onSubmit: any; form: any }) => {
   };
 
   const maskExpiryDate = (value: any) => {
-    // Sadece sayıları al
     const numericValue = value.replace(/\D/g, "");
 
-    // Maksimum 4 karaktere izin ver
     const limitedValue = numericValue.slice(0, 4);
 
-    // 2 karakteri ayırarak maskele
     return limitedValue.replace(/(\d{2})(\d{2})/, "$1/$2");
   };
 
-  const validateExpiryDate = (rule: any, value: any) => {
+  const validateExpiryDate = (value: any) => {
     const numericValue = value.replace(/\D/g, "");
 
     if (numericValue.length !== 4) {
@@ -47,10 +41,8 @@ const CreditCardForm = ({ onSubmit, form }: { onSubmit: any; form: any }) => {
   };
 
   const maskCVV = (value: any) => {
-    // Sadece sayıları al
     const numericValue = value.replace(/\D/g, "");
 
-    // Maksimum 3 karaktere izin ver
     return numericValue.slice(0, 3);
   };
 

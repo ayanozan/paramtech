@@ -1,38 +1,126 @@
 "use client";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Box from "@/components/Box";
 import ContentWrapper from "@/components/ContentWrapper";
+import { InitialState, initialState } from "@/redux/services/basketSlice";
+import MyBasket from "@/components/MyBasket";
 
-import { Col, Form, Row } from "antd";
+import { Badge, Col, Row, Typography } from "antd";
+import { useSelector } from "react-redux";
 
-const PackageDetail = ({ props }: { props: any }) => {
+const PackageDetail = () => {
+  const router = useRouter();
+  const detail = useSelector((state: any) => state.packageReducer.package);
+  const [basket, setBasket] = useState<InitialState>(initialState);
+
+  useEffect(() => {
+    const storedObjectString = localStorage.getItem("myBasket");
+
+    if (storedObjectString !== null) {
+      const storedObject = JSON.parse(storedObjectString);
+      setBasket(storedObject);
+    }
+  }, []);
+
   return (
     <Row gutter={28}>
       <Col span={16}>
         <Box>
-          <ContentWrapper title="Paket Detay |">
-            <img alt="avatar" src={""} />
-          </ContentWrapper>
-
-          <ContentWrapper title="Detay Açıklama">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id
-            arcu ultricies, hendrerit turpis ac, semper justo. Nam orci odio,
-            semper id mauris nec, ornare luctus elit. Orci varius natoque
-            penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            Mauris eu justo sapien. Nullam turpis magna, laoreet at finibus sit
-            amet, ultrices et dolor. Suspendisse vestibulum gravida quam, nec
-            interdum justo pulvinar nec. Aenean quam mauris, fermentum eu
-            iaculis non, egestas a lorem. Sed ante justo, pulvinar dapibus enim
-            id, euismod feugiat arcu. Mauris dictum sed tortor ut placerat. Sed
-            leo ante, laoreet at egestas ut, dapibus et turpis. Duis non enim
-            sed ante aliquet maximus eu et dui. Sed consequat iaculis libero, id
-            pharetra purus blandit vitae. Etiam ut lobortis tortor, sed
-            efficitur tortor. Duis facilisis quam sem, quis pulvinar erat
-            aliquet sit amet. Aliquam velit orci, pellentesque eget varius
-            finibus, sodales quis dolor.
+          <div style={{ marginBottom: "48px" }}>
+            <ContentWrapper
+              isPaddingZero
+              title={
+                <Typography.Text
+                  style={{
+                    color: "#000",
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: "500",
+                    lineHeight: "22px",
+                  }}
+                >
+                  Paket Detay |&nbsp;
+                  <Typography.Text
+                    style={{
+                      color: " #000",
+                      fontSize: "20px",
+                      fontStyle: "normal",
+                      fontWeight: "700",
+                      lineHeight: "22px",
+                    }}
+                  >
+                    {detail.price + detail.currency}
+                  </Typography.Text>
+                </Typography.Text>
+              }
+            >
+              <img
+                style={{ width: "100%", height: "195px", borderRadius: "8px" }}
+                alt="avatar"
+                src={detail.imagePath}
+              />
+            </ContentWrapper>
+          </div>
+          <ContentWrapper
+            title={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "13px",
+                }}
+              >
+                <Typography.Text
+                  style={{
+                    color: " #000",
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: "500",
+                    lineHeight: "22px",
+                  }}
+                >
+                  Detay Açıklama
+                </Typography.Text>
+                <div>
+                  {detail.tags.map((item: any, i: number) => (
+                    <Badge
+                      key={i}
+                      count={item}
+                      showZero
+                      color="#C4C4C4"
+                      style={{
+                        color: "#000",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            }
+          >
+            {detail.moreInformation}
           </ContentWrapper>
         </Box>
       </Col>
-      <Col span={8}>{/* <Box>c</Box> */}</Col>
+      <Col span={8}>
+        <div
+          style={{
+            borderRadius: "12px",
+            backgroundColor: "#FFF",
+            boxShadow: "0px 5px 20px 20px rgba(0, 0, 0, 0.03)",
+            padding: "23px 17px 17px 17px",
+          }}
+        >
+          <MyBasket
+            basketList={basket.basketList}
+            onClick={() => router.push("/checkout")}
+          />
+        </div>
+      </Col>
     </Row>
   );
 };

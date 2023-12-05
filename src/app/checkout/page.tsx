@@ -1,15 +1,15 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Col, Form, Row, message } from "antd";
 import Box from "@/components/Box";
 import ContentWrapper from "@/components/ContentWrapper";
 import CreditCardForm from "@/components/CreditCardForm";
 import MyBasket from "@/components/MyBasket";
-import { Col, Form, Row, message } from "antd";
 import {
   useGetPaymentQuery,
   usePostCheckoutMutation,
 } from "@/redux/services/checkout";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { InitialState, initialState } from "@/redux/services/basketSlice";
 
 const Checkout = () => {
@@ -52,7 +52,7 @@ const Checkout = () => {
       <Col span={16} xs={24} sm={16}>
         <Box>
           <ContentWrapper title="Kart Bilgileri">
-            <CreditCardForm form={form} onSubmit={onSubmit} />
+            <CreditCardForm form={form} />
           </ContentWrapper>
 
           <ContentWrapper title="Sözleşme">

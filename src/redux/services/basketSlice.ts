@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PackageState } from "@/redux/services/packagesSlice";
-import { useMemo } from "react";
 
 export type InitialState = {
   basketList: Array<PackageState>;

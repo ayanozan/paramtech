@@ -1,12 +1,12 @@
 "use client";
-import { setCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
-import { Flex, Form, Button, Input, message } from "antd";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
+import { Flex, Form, Button, Input, message } from "antd";
+import { MailOutlined, UserOutlined } from "@ant-design/icons";
 import { AppDispatch } from "@/redux/store";
 import { logIn } from "@/redux/services/authSlice";
 import { useGetLoginMutation } from "@/redux/services/authSlice";
-import { MailOutlined, UserOutlined } from "@ant-design/icons";
 import "@/styles/login.module.scss";
 
 const formStyle: React.CSSProperties = {

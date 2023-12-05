@@ -1,14 +1,12 @@
 "use client";
-import { CheckCircleOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
+import { CheckCircleOutlined } from "@ant-design/icons";
 const Success = () => {
   return (
     <div
       style={{
-        // width:'355px',
         borderRadius: "12px",
         backgroundColor: "#FFF",
-
         boxShadow: "0px 5px 20px 20px rgba(0, 0, 0, 0.03)",
         padding: "52px 32px 81px 32px",
       }}
