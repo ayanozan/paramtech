@@ -14,14 +14,14 @@ import { InitialState, initialState } from "@/redux/services/basketSlice";
 
 const Checkout = () => {
   const router = useRouter();
-  const { data, error, isLoading } = useGetPaymentQuery("");
-  const [postCheckout, { isLoading: loading, isSuccess }] =
+  const { data } = useGetPaymentQuery("");
+  const [postCheckout, { isLoading: loading }] =
     usePostCheckoutMutation();
 
   const [basket, setBasket] = useState<InitialState>(initialState);
-  const storedObjectString = localStorage.getItem("myBasket");
 
   useEffect(() => {
+    const storedObjectString = localStorage.getItem("myBasket");
     if (storedObjectString !== null) {
       const storedObject = JSON.parse(storedObjectString);
       setBasket(storedObject);
